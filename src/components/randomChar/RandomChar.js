@@ -7,30 +7,27 @@ import './randomChar.scss';
 import mjolnir from '../../resources/img/mjolnir.png';
 
 class RandomChar extends Component {
-
     state = {
         char: {},
         loading: true,
-        error: false,
+        error: false
     }
 
-    marvelService = new MarvelService();
+    marvelService = new MarvelService()
 
     componentDidMount() {
-        this.updateChar();
-        // this.timerId = setInterval(this.updateChar, 3000)
-        // console.log('mount')
+        this.updateChar()
+        // this.timerId = setInterval(this.updateChar, 15000);
     }
-    
+
     componentWillUnmount() {
         clearInterval(this.timerId)
-        // console.log('unmount')
     }
 
     onCharLoaded = (char) => {
         this.setState({
             char, 
-            loading: false,
+            loading: false
         })
     }
 
@@ -49,7 +46,7 @@ class RandomChar extends Component {
 
     updateChar = () => {
         const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
-        this.onCharLoading()
+        !this.state.loading && this.onCharLoading()
         this.marvelService
             .getCharacter(id)
             .then(this.onCharLoaded)
@@ -62,6 +59,7 @@ class RandomChar extends Component {
         const errorMessage = error ? <ErrorMessage/> : null
         const spinner = loading ? <Spinner/> : null
         const content = !(loading || error) ? <View char={char}/> : null
+
         return (
             <div className="randomchar">
                 {errorMessage}
@@ -87,9 +85,9 @@ class RandomChar extends Component {
 
 const View = ({char}) => {
     const {name, description, thumbnail, homepage, wiki} = char
-    let imgStyle = {'objectFit' : 'cover'};
+    let imgStyle = {'objectFit' : 'cover'}
     if (thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
-        imgStyle = {'objectFit' : 'contain'};
+        imgStyle = {'objectFit' : 'contain'}
     }
 
     return (
@@ -97,7 +95,9 @@ const View = ({char}) => {
             <img src={thumbnail} alt="Random character" className="randomchar__img" style={imgStyle}/>
             <div className="randomchar__info">
                 <p className="randomchar__name">{name}</p>
-                <p className="randomchar__descr">{description}</p>
+                <p className="randomchar__descr">
+                    {description}
+                </p>
                 <div className="randomchar__btns">
                     <a href={homepage} className="button button__main">
                         <div className="inner">homepage</div>
@@ -111,4 +111,4 @@ const View = ({char}) => {
     )
 }
 
-export default RandomChar;
+export default RandomChar
