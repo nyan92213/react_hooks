@@ -7,6 +7,15 @@ import ErrorBoundary from "../errorBoundary/ErrorBoundary";
 
 import decoration from '../../resources/img/vision.png';
 
+
+// const DynamicGreating = (props) => {
+//     return (
+//         <div className={'mb-3 p-3 border border-' + props.color}>
+//             {props.children}
+//         </div>
+//     )
+// }
+
 class App extends Component {
     state = {
         selectedChar: null
@@ -23,6 +32,10 @@ class App extends Component {
             <div className="app">
                 <AppHeader/>
                 <main>
+                    {/* <DynamicGreating color={'primary'}>
+                        <h2>this</h2>
+                        <h2>hello</h2>
+                    </DynamicGreating> */}
                     <ErrorBoundary>
                         <RandomChar/>
                     </ErrorBoundary>
