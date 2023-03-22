@@ -2,7 +2,7 @@ import AppHeader from "../appHeader/AppHeader";
 import RandomChar from "../randomChar/RandomChar";
 import CharList from "../charList/CharList";
 import CharInfo from "../charInfo/CharInfo";
-import { Component } from "react";
+import React, { Component } from "react";
 import ErrorBoundary from "../errorBoundary/ErrorBoundary";
 
 import decoration from '../../resources/img/vision.png';
@@ -11,7 +11,21 @@ import decoration from '../../resources/img/vision.png';
 // const DynamicGreating = (props) => {
 //     return (
 //         <div className={'mb-3 p-3 border border-' + props.color}>
-//             {props.children}
+//             {
+//                 React.Children.map(props.children, child => {
+//                     return React.cloneElement(child, {className: 'shadow p-3 m-3 border rounded'}) // модифицируем ребенка. Клнировать обязательно
+//                 })
+//             }
+//         </div>
+//     )
+// }
+
+// const HelloGreatings = () => {
+//     return (
+//         <div style={{'width': '600px', 'margin': '0 auto'}}>
+//             <DynamicGreating color={'primary'}>
+//                 <h2>this</h2>
+//             </DynamicGreating>
 //         </div>
 //     )
 // }
@@ -32,6 +46,7 @@ class App extends Component {
             <div className="app">
                 <AppHeader/>
                 <main>
+                    {/* <HelloGreatings/> */}
                     {/* <DynamicGreating color={'primary'}>
                         <h2>this</h2>
                         <h2>hello</h2>
