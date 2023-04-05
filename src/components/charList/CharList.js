@@ -15,7 +15,7 @@ const CharList = (props) => {
 
   useEffect(() => {
     // т.к. useEffect вызывается после конструирования страницы, функцию в нем можно вызывать до объявления по коду
-    onRequest();
+    onRequest(offset, true);
   }, []); // аналог componentDidMount, если в конце передаем [] т.к. обновления state не будет
 
   const onRequest = (offset, initial) => {
@@ -84,14 +84,13 @@ const CharList = (props) => {
   const items = renderItems(charList);
 
   const errorMessage = error ? <ErrorMessage /> : null;
-  const spinner = loading ? <Spinner /> : null;
-  const content = !(loading || error) ? items : null;
+  const spinner = loading && !newItemLoading ? <Spinner /> : null;
 
   return (
     <div className="char__list">
       {errorMessage}
       {spinner}
-      {content}
+      {items}
       <button
         className="button button__main button__long"
         disabled={newItemLoading}
